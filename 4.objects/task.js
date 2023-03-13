@@ -10,9 +10,7 @@ Student.prototype.setSubject = function (subjectName) {
 };
 
 Student.prototype.addMarks = function (...marks) {
-  if (this.hasOwnProperty("marks") === false) {
-    return "Отчислен";
-  } else {
+  if (this.hasOwnProperty("marks")) {
     this.marks.push(...marks);
   }
 };
@@ -28,8 +26,9 @@ Student.prototype.getAverage = function () {
 };
 
 Student.prototype.exclude = function (reason) {
-  delete this.subject && delete this.marks;
-  this.exclude = reason;
+  delete this.subject;
+  delete this.marks;
+  this.excluded = reason;
 };
 
 let student1 = new Student("Ангелина", "женский", 20);
