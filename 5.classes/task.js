@@ -101,6 +101,7 @@ library.addBook(
   new DetectiveBook("Эдгар Аллан По", "Убийство на улице Морг", 2019, 288)
 );
 library.addBook(new Magazine('ДЭВИД ЛИНЧ | "Твин-пикс"', 2020, 107));
+library.addBook(new Magazine('РАФФИ | "Дневник Крестокрада"', 1989, 360));
 
 //Задание #3
 
