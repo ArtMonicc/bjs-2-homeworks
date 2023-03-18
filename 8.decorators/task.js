@@ -20,22 +20,27 @@ function cachingDecoratorNew(func) {
 }
 
 //Задача № 2
-function cachingDecoratorNew(func) {
-  let cache = [];
+function debounceDecoratorNew(func, delay) {
+  let timeoutId = null;
   function wrapper(...args) {
-    const hash = md5(args);
-    const objectInCache = cache.find((item) => item.hash === hash);
-    if (objectInCache) {
-      console.log("Из кэша: " + objectInCache.value);
-      return "Из кэша: " + objectInCache.value;
+    if (timeoutId === null) {
+      func(...args);
+      wrapper.count++;
     }
-    let result = func(...args);
-    cache.push({ hash: hash, value: result });
-    if (cache.length > 5) {
-      cache.shift();
+
+    if (timeoutId) {
+      clearTimeout(timeoutId);
     }
-    console.log("Вычисляем: " + result);
-    return "Вычисляем: " + result;
+
+    timeoutId = setTimeout(() => {
+      timeoutId = true;
+      func(...args);
+      wrapper.count++;
+    }, delay);
+    wrapper.allCount++;
   }
+
+  wrapper.count = 0;
+  wrapper.allCount = 0;
   return wrapper;
 }
